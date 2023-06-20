@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/meet/static/js/main.31d6cfe0.js",
+    "service-worker.js": "/meet/service-worker.js",
+    "index.html": "/meet/index.html"
+  },
+  "entrypoints": [
+    "static/js/main.31d6cfe0.js"
+  ]
+}

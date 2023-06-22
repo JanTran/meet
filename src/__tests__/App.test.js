@@ -74,4 +74,22 @@ describe('<App /> integration', () => {
       expect(AppWrapper.find('.event')).toHaveLength(mockData.length);
     });
   });
+  test('User should see a list of suggestions when they search for a city', ({ given, when, then }) => {
+    given('the main page is open', () => {
+        let CitySearchWrapper;
+        given('the main page is open', () => {
+          CitySearchWrapper = shallow(<CitySearch updateEvents={() => {}} locations={locations} />);
+        });
+    });
+
+    when('user starts typing in the city textbox', () => {
+        when('user starts typing in the city textbox', () => {
+          CitySearchWrapper.find('.city').simulate('change', { target: { value: 'Berlin' } });
+        });
+    });
+
+    then('the user should receive a list of cities (suggestions) that match what they’ve typed', () => {
+        expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(2);
+    });
+  });
 });

@@ -47,7 +47,7 @@
       const resultLink = document.getElementById("authURL");
       // Replace this with your own endpoint
       const getAuthURL =
-        "https://p4oispwy92.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url";
+        "https://6oipi8mxt9.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url";
 
       getURLElement.onclick = function () {
         fetch(getAuthURL)
@@ -70,7 +70,7 @@
       const getAccessToken = document.getElementById("getToken");
       const accessTokenElement = document.getElementById("accessToken");
       const getToken =
-        "https://p4oispwy92.execute-api.eu-central-1.amazonaws.com/dev/api/token/";
+        "https://6oipi8mxt9.execute-api.eu-central-1.amazonaws.com/dev/api/token/";
 
       getAccessToken.onclick = function () {
         let code = codeValue.value;
@@ -79,7 +79,7 @@
         if (decodeURIComponent(code) === code) {
           code = encodeURIComponent(codeValue.value);
         }
-        const getTokenRequest = getToken +  "/" + code;
+        const getTokenRequest = getToken + code;
         fetch(getTokenRequest)
           .then(function (response) {
             return response.json();

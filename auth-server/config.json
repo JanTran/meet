@@ -1,6 +1,7 @@
 {
-  "CLIENT_ID": "39389031879-lai01h5thgki1r9rapf1j0tb5quc4bu8.apps.googleusercontent.com",
-  "PROJECT_ID": "meet-app-390000",
-  "CLIENT_SECRET": "YGOCSPX-aRjl1uDQWqJmG9e2OI62SUO24RV2",
-  "CALENDAR_ID": "fullstackwebdev@careerfoundry.com"
+    "CLIENT_ID": "39389031879-lai01h5thgki1r9rapf1j0tb5quc4bu8.apps.googleusercontent.com",
+    "PROJECT_ID": "meet-app-390000",
+    "CLIENT_SECRET": "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",
+    "CALENDAR_ID": "fullstackwebdev@careerfoundry.com"
 }
+  

@@ -10,12 +10,7 @@ const CitySearch = ({ allLocations }) => {
     value={query}
     onFocus={() => setShowSuggestions(true)}
   />]);
-  const handleItemClicked = (suggestion) => {
-    this.setState({
-      query: suggestion,
-      showSuggestions: false,
-      infoText: '',
-    });
+ 
 
   const handleInputChanged = (event) => {
     const value = event.target.textContent;

@@ -1,11 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App/App';
+import * as atatus from 'atatus-spa';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+atatus.config('f9872c0b8cbd48c2aad53d6015fb2b1c').install();

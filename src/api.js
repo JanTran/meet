@@ -1,20 +1,22 @@
-import { mockData } from './mock-data';
-import axios from 'axios';
+import { mockData } from "./mock-data";
+import axios from "axios";
 import NProgress from "nprogress";
 
 export const extractLocations = (events) => {
   var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
+  return [...new Set(extractLocations)];
 };
 
 export const checkToken = async (accessToken) => {
-  const result = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-  )
-    .then((res) => res.json())
-    .catch((error) => error);
-  return result;
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return error;
+  }
 };
 
 const removeQuery = () => {
@@ -39,12 +41,14 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  
   const token = await getAccessToken();
 
   if (token) {
     removeQuery();
-    const url = 'https://he444gklll.execute-api.us-east-2.amazonaws.com/dev/api/get-events' + '/' + token;
+    const url =
+      "https://he444gklll.execute-api.us-east-2.amazonaws.com/dev/api/get-events" +
+      "/" +
+      token;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
@@ -57,7 +61,7 @@ export const getEvents = async () => {
 };
 
 export const getAccessToken = async () => {
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem("access_token");
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
   if (!accessToken || tokenCheck.error) {
@@ -74,20 +78,24 @@ export const getAccessToken = async () => {
     return code && getToken(code);
   }
   return accessToken;
-}
+};
 
 const getToken = async (code) => {
-    try {
-        const encodeCode = encodeURIComponent(code);
+  try {
+    const encodeCode = encodeURIComponent(code);
 
-        const response = await fetch( 'https://f4rud9gm5a.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        const { access_token } = await response.json();
-        access_token && localStorage.setItem("access_token", access_token);
-        return access_token;
-    } catch(error) {
-        error.json();
+    const response = await fetch(
+      "https://f4rud9gm5a.execute-api.eu-central-1.amazonaws.com/dev/api/token" +
+        "/" +
+        encodeCode
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-}
+    const { access_token } = await response.json();
+    access_token && localStorage.setItem("access_token", access_token);
+    return access_token;
+  } catch (error) {
+    error.json();
+  }
+};

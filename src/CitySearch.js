@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class CitySearch extends Component {
   state = {
-    query: '',
+    query: "",
     suggestions: [],
-    showSuggestions: undefined
-  }
+    showSuggestions: undefined,
+  };
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
-      showSuggestions: false
+      showSuggestions: false,
     });
-  
+
     this.props.updateEvents(suggestion);
-  }
+  };
 
   handleInputChanged = (event) => {
     const value = event.target.value;
@@ -25,11 +25,6 @@ class CitySearch extends Component {
       suggestions,
     });
   };
-  handleItemClicked = (suggestion) => {
-    this.setState({
-      query: suggestion
-    });
-  }
 
   render() {
     return (
@@ -39,27 +34,27 @@ class CitySearch extends Component {
           className="city"
           value={this.state.query}
           onChange={this.handleInputChanged}
-          onFocus={() => { this.setState({ showSuggestions: true }) }}
+          onFocus={() => {
+            this.setState({ showSuggestions: true });
+          }}
         />
-        <ul className="suggestions" style={this.state.showSuggestions ? {}: { display: 'none' }}>
-          {this.state.suggestions.map((suggestion) => (
-          <li key={suggestion}>{suggestion}</li>
-            ))}
-          <li key='all'>
-            <b>See all cities</b>
-          </li>
-        </ul>
-        <ul className="suggestions">
+        <ul
+          className="suggestions"
+          style={!this.state.showSuggestions ? { display: "none" } : {}}
+        >
           {this.state.suggestions.map((suggestion) => (
             <li
               key={suggestion}
               onClick={() => this.handleItemClicked(suggestion)}
-                >{suggestion}</li>
-              ))}
-            <li onClick={() => this.handleItemClicked("all")}>
-              <b>See all cities</b>
+            >
+              {suggestion}
             </li>
+          ))}
+          <li onClick={() => this.handleItemClicked("all")}>
+            <b>See all cities</b>
+          </li>
         </ul>
+      </div>
     );
   }
 }

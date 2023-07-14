@@ -1,10 +1,44 @@
 // src/App.js
 
-import React, { Component } from 'react';
+import CitySearch from './components/CitySearch';
+import EventList from './components/EventList';
+import './App.css';
+import { InfoAlert } from './components/Alert';
+
+const App = () => {
+  const [allLocations, setAllLocations] = useState([]);
+  const [currentNOE, setCurrentNOE] = useState(32);
+  const [events, setEvents] = useState([]);
+  const [currentCity, setCurrentCity] = useState("See all cities");
+  const [infoAlert, setInfoAlert] = useState("");
+}
+const handleInputChanged = (event) => {
+  const value = event.target.value;
+  const filteredLocations = allLocations ? allLocations.filter((location) => {
+    return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
+  }) : [];
+
+  setQuery(value);
+  setSuggestions(filteredLocations);
+
+  let infoText;
+  if (filteredLocations.length === 0) {
+    infoText = "We can not find the city you are looking for. Please try another city"
+  } else {
+    infoText = ""
+  }
+  setInfoAlert(infoText);
+};
+
+export default App;
+
+
+/* import React, { Component } from 'react';
 import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import { getEvents, extractLocations } from './api';
+
 
 class App extends Component {
   state = {
@@ -83,4 +117,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App; */

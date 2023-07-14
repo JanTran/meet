@@ -1,10 +1,26 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import App from '../App';
+
+describe('<App /> component', () => {
+  let AppDOM;
+  beforeEach(() => {
+    AppDOM = render(<App />).container.firstChild;
+  })
+
+  test('renders list of events', () => {
+    expect(AppDOM.querySelector('#event-list')).toBeInTheDocument();
+  });
+
+  test('render CitySearch', () => {
+    expect(AppDOM.querySelector('#city-search')).toBeInTheDocument();
+  });
+});
+
+/* import React from 'react';
 import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
 import { mockData } from '../mock-data';
-import NumberOfEvents from '../NumberOfEvents';
 import { extractLocations, getEvents } from '../api';
 
 describe('<App /> component', () => {
@@ -58,27 +74,4 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events')).toEqual(allEvents);
     AppWrapper.unmount();
   });
-  test("number of events state equals number of events specified", async () => {
-    const AppWrapper = mount(<App />);
-    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    const eventCount = Math.floor(1 + Math.random() * 2);
-    const allEvents = await getEvents();
-    const cutEvents = allEvents.slice(0, eventCount);
-    await NumberOfEventsWrapper.find(".nrOfEvents").simulate("change", { target: { value: eventCount } });
-    expect(AppWrapper.state("events")).toEqual(allEvents);
-    expect(AppWrapper.state("numberOfEvents")).toEqual(eventCount);
-    AppWrapper.unmount();
-  });
-
-  test("renders correct number of events", async () => {
-    const AppWrapper = mount(<App />);
-    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    const eventCount = Math.floor(1 + Math.random() * 2);
-    const event = { target: { value: eventCount } };
-    await NumberOfEventsWrapper.instance().handleChange(event);
-    AppWrapper.update();
-    expect(AppWrapper.find(EventList).find("li")).toHaveLength(eventCount);
-    AppWrapper.unmount();
-  });
-  
-});
+}); */
